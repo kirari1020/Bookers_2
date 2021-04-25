@@ -1,14 +1,23 @@
-   <p id="notice"></p>
-  <div class="container">
+<div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
     <h2>User info</h2>
+          
+          <% if @user.errors.any? %>
+          <h3><%= @user.errors.count %>error prohibited this obj from being saved:</h3>
+          <ul><li>
+          <% @user.errors.full_messages.each do |message| %>
+          <%= message %>
+          <% end %>
+          </li></ul>
+          <% end %>
+      
     <%= form_with model:@user, local:true do |f| %>
       
       <div class="form-group">
         <label for="user_name">Name</label>
         </br>
-        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
+        <%= f.text_field :name, class: "form-control user_name" %>
       </div>
      <div class="form-group">
         <label for="user_image">Image</label>
@@ -18,12 +27,12 @@
       <div class="form-group">
         <label for="user_introduction">Introduction</label>
         </br>
-         <%= f.text_area :body %>
+         <%= f.text_area :introduction, class: "form-control user_introduction" %>
       </div>
       <div class="form-group">
-        <%= f.submit "Update User" %>
+        <%= f.submit "Update User", class: "btn btn-secondary" %>
       </div>
         <% end %>
-      </div>
+   </div>
  </div>
 </div>

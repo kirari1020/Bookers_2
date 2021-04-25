@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://kit.fontawesome.com/397c7483b2.js" crossorigin="anonymous"></script>
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,26 +16,29 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
-      <li class="fas fa-home nav-link text-light"><%= link_to "Home",user_path(current_user) %></li>
-       <li class="fas fa-link nav-link text-light"><%= link_to "Users",users_path %></li>
-       <li class="fas fa-user-plus nav-link text-light"><%= link_to "Books", books_path %></li>
-      <li class="fas fa-sign-in-alt nav-link text-light"><%= link_to "logout", destroy_user_session_path, method: :delete %></li>
+      <li><%= link_to " Home",user_path(current_user.id), class: "fas fa-home nav-link text-light" %></li>
+       <li><%= link_to " Users",users_path, class: "fas fa-users nav-link text-light" %></li>
+       <li><%= link_to " Books", books_path, class: "fas fa-book-open nav-link text-light" %></li>
+      <li><%= link_to " logout", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %></li>
     <% else %>
-       <li class="fas fa-home nav-link text-light"><%= link_to "Home",root_path %></li>
-       <li class="fas fa-link nav-link text-light"><%= link_to "About",about_path %></li>
-       <li class="fas fa-user-plus nav-link text-light"><%= link_to "sign_up", new_user_registration_path %></li>
-      <li class="fas fa-sign-in-alt nav-link text-light"><%= link_to "Log in", new_user_session_path %></li>
+       <li><%= link_to " Home",root_path, class: "fas fa-home nav-link text-light" %></li>
+       <li><%= link_to " About",home_about_path, class: "fas fa-link nav-link text-light" %></li>
+       <li><%= link_to " sign up", new_user_registration_path, class: "fas fa-user-plus nav-link text-light" %></li>
+      <li><%= link_to " login", new_user_session_path, class: "fas fa-sign-in-alt nav-link text-light" %></li>
     <% end %>
-          
+
         </ul>
       </div>
     </div>
   </nav>
 </header>
   <body>
-      
-    <%= yield %>
-    
+    <p id="notice"><% flash.each do |message_type, message| %>
+      <%= message %>
+    <% end %>
+    </p>
+ <%= yield %>
+
     <footer>
       <div class="container mt-5">
       	<div class="row">
